@@ -13,7 +13,6 @@ config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = 'PSet.py'
 config.JobType.scriptExe = 'crab_script.sh'
 config.JobType.inputFiles = ['crab_script.py', 'keep_and_drop_in.txt', 'keep_and_drop_out.txt']
-config.JobType.scriptArgs = ['isMC=1','era=2018']
 config.section_("Data")
 #config.Data.inputDataset = '/GluGlu_LFV_HToEMu_M125_TuneCP5_13TeV_PSweights_powheg_pythia8/RunIISummer20UL18NanoAODv2-106X_upgrade2018_realistic_v15_L1v1-v1/NANOAODSIM'
 #config.Data.inputDBS = 'phys03'
