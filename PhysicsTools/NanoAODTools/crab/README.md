@@ -1,4 +1,4 @@
-# NanoHEMSkim
+# NanoLFVSkim
 This is a repository to produce skimmed NanoAOD files for X -> et/mt analysis. First, you need to setup a fresh CMSSW_13_3_0 and clone the PhysicsTools/NanoAODTools package in this branch. 
 
 # Get sample/dataset paths
@@ -9,7 +9,7 @@ python3 get_sample_list.py
 # Local run
 To test locally before submitting to CRAB, uncomment and put your input files to the testFile list in ```crab_script.py``` and replae all ```inputFiles()``` to ```testFile```. Then do
 ```bash
-python crab_script.py --year {which year}
+python3 crab_script.py --year {which year}
 ```
 # Submit CRAB jobs
 Set up the CRAB env
@@ -20,12 +20,17 @@ Then create a dir for crab workspaces
 ```bash
 mkdir workspace
 ```
-and search for all occurance of ```kho2``` in ```crab_cfg.py``` and replace with your username or paths accordingly. To submit jobs, do, for example,
+and search for all occurance of ```kho2``` in ```crab_cfg.py``` and replace with your username or paths accordingly. For some reasons, crab does not send the python scripts correctly, so do
 ```bash
-python crab_cfg.py NanoAODUL_2017_data.json 
+cp ../python/postprocessing/ $CMSSW_BASE/python/PhysicsTools/NanoAODTools
 ```
+before submitting jobs. To submit jobs, do, for example,
+```bash
+python3 crab_cfg.py NanoAODUL_2017_data.json 
+```
+Similarly, for MC and other years.
 ## Monitoring
-To monitor job status, go to ```https://monit-grafana.cern.ch```, look for "CMS Tasks Monitoring GlobalView" and type in your username and correct time range.
+To monitor job status, go to ```https://monit-grafana.cern.ch```, look for "CMS Tasks Monitoring GlobalView", and type in your username and time range. Otherwise, you can use the traditional crab status command to monitor each single job.
 
 ## Resubmit CRAB jobs
 Jobs will fail! To resubmit failed CRAB jobs, do
