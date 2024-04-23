@@ -2,7 +2,16 @@
 drop * # start with all
 keep PV_npvsGood
 keep TrigObj*
-keep n*Jet*
+drop TrigObj_l1*
+drop TrigObj_l2*
+keep nTrigObj
+keep nCorrT1METJet
+keep nGenJet
+keep nElectron
+keep nMuon
+keep nTau
+keep nJet
+keep nGenPart
 keep Flag*
 keep CorrT1METJet*
 keep RawMET*
@@ -18,7 +27,14 @@ keep MET*
 keep HLT*_IsoMu*
 keep HLT*_Ele*
 keep HLT*_Mu*_Ele*
+drop HLT*_IsoMu*MET*
+drop HLT_DiMu*
+drop HLT_*PFHT*
+drop HLT_*DiJet*
+drop HLT_*PFJet*
+drop HLT_*Ele16_Ele12_Ele8*
 keep *Weight*
+drop btagWeight*
 keep GenPart*
 keep run
 keep event

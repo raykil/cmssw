@@ -8,8 +8,8 @@ parser.add_argument('-jobNum', '--jobNum', type=str, default='1', help="")
 parser.add_argument('-y', '--year', type=str, default='2018')
 args = parser.parse_args()
 
-looseElectron = "(Electron_pt > 20 && abs(Electron_eta) < 2.5 && !((abs(Electron_eta) < 1.566) && (abs(Electron_eta) > 1.442)) && Electron_mvaFall17V2noIso_WP90 && abs(Electron_dxy) < 0.5 && abs(Electron_dz) < 0.2)"
-looseMuon = "(Muon_pt > 15 && abs(Muon_eta) < 2.4 && Muon_looseId && abs(Muon_dxy) < 0.5 && abs(Muon_dz) < 0.2)"
+looseElectron = "(Electron_pt > 10 && abs(Electron_eta) < 2.5 && !((abs(Electron_eta) < 1.566) && (abs(Electron_eta) > 1.442)) && Electron_mvaFall17V2noIso_WP90 && abs(Electron_dxy) < 0.5 && abs(Electron_dz) < 0.2)"
+looseMuon = "(Muon_pt > 10 && abs(Muon_eta) < 2.4 && Muon_looseId && abs(Muon_dxy) < 0.5 && abs(Muon_dz) < 0.2)"
 looseTau = "(Tau_pt > 30 && abs(Tau_eta) < 2.3 && Tau_idDeepTau2017v2p1VSjet >=8 && abs(Tau_dz) < 0.2)"
 
 selections_em = "(Sum$(%s)>0 && Sum$(%s)>0)"%(looseElectron, looseMuon)
@@ -30,14 +30,14 @@ testFile = ['root://cms-xrd-global.cern.ch//store/mc/RunIISummer20UL18NanoAODv9/
 
 print("RUNNING")
 p = PostProcessor(".",
-              testFile,
-#              inputFiles(),
+#              testFile,
+              inputFiles(),
               selections,
               branchsel="keep_and_drop_in.txt",
               outputbranchsel="keep_and_drop_out.txt",
               modules=[],
               provenance=True,
-              maxEntries=100, #just read the first maxEntries events
+#              maxEntries=100, #just read the first maxEntries events
               fwkJobReport=True,
               jsonInput=runsAndLumis()
               )
