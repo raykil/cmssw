@@ -16,17 +16,18 @@ selections_em = "(Sum$(%s)>0 && Sum$(%s)>0)"%(looseElectron, looseMuon)
 selections_etau = "(Sum$(%s)>0 && Sum$(%s)>0)"%(looseElectron, looseTau)
 selections_mtau = "(Sum$(%s)>0 && Sum$(%s)>0)"%(looseMuon, looseTau)
 
-Triggers = "HLT_IsoMu24 | HLT_Ele27_WPTight_Gsf | HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL | HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ | HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL | HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ | HLT_IsoMu27 | HLT_Ele32_WPTight_Gsf_L1DoubleEG | HLT_IsoMu24 | HLT_Ele32_WPTight_Gsf"
+Triggers = "(HLT_IsoMu24 | HLT_Ele27_WPTight_Gsf | HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL | HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ | HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL | HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ | HLT_Ele32_WPTight_Gsf_L1DoubleEG | HLT_Ele32_WPTight_Gsf)"
 METFilters = "(Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_eeBadScFilter && Flag_eeBadScFilter && Flag_BadPFMuonDzFilter)"
 
 if '2016' in args.year:
-  Triggers.replace(")",  "| HLT_IsoTkMu24)")
+  Triggers = Triggers.replace("HLT_Ele32_WPTight_Gsf_L1DoubleEG",  "HLT_Ele27_WPTight_Gsf | HLT_IsoTkMu24")
 else:
-  METFilters.replace(")",  "&& Flag_ecalBadCalibFilter)")
-
+  METFilters = METFilters.replace(")",  "&& Flag_ecalBadCalibFilter)")
+if '2017' in args.year:
+  Triggers = Triggers.replace("HLT_IsoMu24", "HLT_IsoMu27")
 selections = "("+selections_em+"||"+selections_etau+"||"+selections_mtau+")&&"+METFilters+"&&(PV_npvsGood > 0)&&"+Triggers
 
-testFile = ['root://cms-xrd-global.cern.ch//store/mc/RunIISummer20UL18NanoAODv9/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v16_L1v1-v1/130000/44187D37-0301-3942-A6F7-C723E9F4813D.root']
+testFile = ['root://cmsxrootd.fnal.gov//store/mc/RunIISummer20UL16NanoAODAPVv9/WW_TuneCP5_13TeV-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v11-v1/280000/B81CEDFF-0ABA-7A48-84E3-C52B5DD8ECC6.root']
 
 print("RUNNING")
 p = PostProcessor(".",
