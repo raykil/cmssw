@@ -14,6 +14,7 @@ keep Tau*
 keep Jet*
 keep MET*
 keep HLT*_IsoMu*
+keep HLT*_IsoTkMu*
 drop HLT*_IsoMu*MET*
 keep HLT*_Ele*
 keep HLT*_Mu*_Ele*
