@@ -7,7 +7,7 @@ config = config()
 config.section_("General")
 config.General.requestName = 'NanoPost'
 config.General.transferLogs = True
-config.General.workArea = '/afs/cern.ch/work/k/kaho/CMSSW_13_3_0/src/PhysicsTools/NanoAODTools/crab/workspace'
+config.General.workArea = '/afs/cern.ch/user/j/jkil/CMSSW_13_3_0/src/PhysicsTools/NanoAODTools/crab/workspace'
 config.section_("JobType")
 config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = 'PSet.py'
@@ -24,7 +24,7 @@ config.Data.unitsPerJob = 1
 #config.Data.splitting = 'EventAwareLumiBased'
 #config.Data.totalUnits = 10
 
-config.Data.outLFNDirBase = '/store/user/kaho/NanoPost_' 
+config.Data.outLFNDirBase = '/store/user/jkil/NanoPost_'
 #config.Data.outLFNDirBase = '/store/user/%s/NanoPost' % (
 #    getUsernameFromSiteDB())
 config.Data.publication = False
@@ -57,9 +57,10 @@ if __name__ == '__main__':
     for sample_shorthand, sample in samples.items():
         print("Submitting Jobs for "+sample_shorthand)
         assert (len(sample) == 1), "Multiple VERs of samples are imported! Pick one!"
-        config.Data.outLFNDirBase = '/store/user/kaho/NanoPost_'+year+'_v9'
+        config.Data.outLFNDirBase = '/store/user/jkil/NanoPost_'+year+'_v9'
         config.Data.inputDataset = sample[0]
         config.General.requestName = sample_shorthand+'_'+year
         config.Data.outputDatasetTag = sample_shorthand
         config.JobType.scriptArgs = ['year=%s'%year]
         crabCommand('submit', config=config)#, dryrun=True)
+
