@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--fresh', action='store_true', help='Fresh patch of crab jobs')
 args = parser.parse_args()
 
-list_of_jobs = glob.glob('//afs/cern.ch/work/k/kaho/CMSSW_13_3_0/src/PhysicsTools/NanoAODTools/crab/workspace/*')
+list_of_jobs = glob.glob('//afs/cern.ch/user/j/jkil/CMSSW_13_3_0/src/PhysicsTools/NanoAODTools/crab/workspace/*')
 
 list_of_submit_fail_jobs = []
 if args.fresh:
@@ -19,9 +19,9 @@ for job in list_of_jobs:
     continue
   else:
     res = crabCommand('status', dir = job)
-    if res['status']=='COMPLETED':
-      list_of_finished_jobs.append(job)
-    elif res['dbStatus']=='SUBMITFAILED' or res['jobList'] == {}:
+    #if res['status']=='COMPLETED':
+      #list_of_finished_jobs.append(job)
+    if res['dbStatus']=='SUBMITFAILED' or res['jobList'] == {}:
       list_of_submit_fail_jobs.append(job)
       input("Press any key to delete "+job)
       os.system("rm -rf "+job)
