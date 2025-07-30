@@ -10,7 +10,7 @@
   "TTTo2L2Nu" : "TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8",
   "GluGluHToWW_M125" : "GluGluHToWWTo2L2Nu_M-125_CPS_NNPDF31_TuneCP5_13TeV-powheg-jhugen735-pythia8",
   "GluGluHToTauTau_M125" : "GluGluHToTauTau_M125_TuneCP5_13TeV-powheg-pythia8",
-  "VBFHToTauTau_M125" : "VBFHToWWTo2L2Nu_M-125_CPS_NNPDF31_TuneCP5_withDipoleRecoil_13TeV-powheg-jhugen735-pythia8",
+  "VBFHToTauTau_M125" : "VBFHToTauTau_M125_TuneCP5_13TeV-powheg-pythia8",
   "VBFHToWW_M125" : "VBFHToWWTo2L2Nu_M-125_CPS_NNPDF31_TuneCP5_withDipoleRecoil_13TeV-powheg-jhugen735-pythia8",
   "WplusHToTauTau_M125" : "WplusHToTauTau_M125_TuneCP5_13TeV-powheg-pythia8",
   "WminusHToTauTau_M125" : "WminusHToTauTau_M125_TuneCP5_13TeV-powheg-pythia8",

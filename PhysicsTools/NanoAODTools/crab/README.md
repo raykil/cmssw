@@ -1,40 +1,49 @@
-# NanoLFVSkim
-This is a repository to produce skimmed NanoAOD files for X -> et/mt analysis. First, you need to setup a fresh CMSSW_13_3_0 and clone the PhysicsTools/NanoAODTools package in this branch. 
+# NANOAOD Skims for LFV
 
-# Get sample/dataset paths
-To produce json files of sample/dataset paths:
+This directory contains scripts that produce skimmed NanoAOD files for $X\rightarrow e\mu, e\tau, \mu\tau$ analysis. Input files are located in [CMS DAS](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookLocatingDataSamples#CliDas), and the output files are saved in [CEPH](https://crcresearch.github.io/ndcmsT3/resources/ndcms/#ceph-space). You need to setup a fresh CMSSW_13_3_0 and clone the PhysicsTools/NanoAODTools package in this branch.
+
+### Step 0: Setup
+0. If GRID certificate is not set up, follow the instructions in [WorkBookStartingGrid](https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookStartingGrid).
+
+1. Set up the CMSSW environment with the following commands:
+```bash
+voms-proxy-init --rfc --voms cms -valid 192:00
+conda deactivate
+cd ~/CMSSW_13_3_0/src
+cmsenv
+```
+2. Then, set up the CRAB environment with the following commands:
+```bash
+cd PhysicsTools/NanoAODTools/crab
+source /cvmfs/cms.cern.ch/common/crab-setup.sh
+mkdir workspace
+export CMSSW_BASE=/afs/cern.ch/user/$(whoami | cut -c1)/$(whoami)/CMSSW_13_3_0
+cp -r ../python/postprocessing/ $CMSSW_BASE/python/PhysicsTools/NanoAODTools
+```
+
+### Step 1: Getting samples
+Run the following command to produce json files of sample names for each year and type (data or mc):
 ```bash
 python3 get_sample_list.py
 ```
-# Local run
-To test locally before submitting to CRAB, uncomment and put your input files to the testFile list in ```crab_script.py``` and replae all ```inputFiles()``` to ```testFile```. Then do
-```bash
-python3 crab_script.py --year {which year}
-```
-# Submit CRAB jobs
-Set up the CRAB env
-```bash
-source /cvmfs/cms.cern.ch/common/crab-setup.sh
-```
-Then create a dir for crab workspaces
-```bash
-mkdir workspace
-```
-and search for all occurance of ```kho2``` in ```crab_cfg.py``` and replace with your username or paths accordingly. For some reasons, crab does not send the python scripts correctly, so do
-```bash
-cp ../python/postprocessing/ $CMSSW_BASE/python/PhysicsTools/NanoAODTools
-```
-before submitting jobs. To submit jobs, do, for example,
-```bash
-python3 crab_cfg.py NanoAODUL_2017_data.json 
-```
-Similarly, for MC and other years.
-## Monitoring
-To monitor job status, go to ```https://monit-grafana.cern.ch```, look for "CMS Tasks Monitoring GlobalView", and type in your username and time range. Otherwise, you can use the traditional crab status command to monitor each single job.
 
-## Resubmit CRAB jobs
+### Step 2: Submitting jobs
+Submit jobs via the following command:
+``` bash
+python3 crab_cfg.py {json name}     # Ex) python3 crab_cfg.py NanoAODUL_2017_MC.json
+```
+
+As of 2025.07.30, the results are stored in ceph `/store/user/jkil/LFV/skims/<yyyymmdd>/<sample_year>/`.
+To access the ceph directories, use the following command:
+```bash
+xrdfs hactar01.crc.nd.edu ls /store/user/<username>
+```
+
+### Step 3: Monitoring
+To monitor job status, go to `https://monit-grafana.cern.ch`, look for "CMS Tasks Monitoring GlobalView", and type in your username and time range. You can also use the traditional crab status command to monitor each single job.
+
+### Step 4: Resubmitting jobs
 Jobs will fail! To resubmit failed CRAB jobs, do
 ```bash
-python resubmit.py -f
+python3 resubmit.py -f
 ```
-which also creates a json file named ```finishedJobs.json``` that contains a list of the finished jobs. The option ```-f``` creates a new ```finishedJobs.json``` for a new patch of CRAB jobs. Omit ```-f``` if ```finishedJobs.json``` was already created for the patch of jobs.

@@ -1,5 +1,7 @@
 # this is a comment
 drop * # start with all
+keep PV_npvsGood
+keep PV_npvs
 keep TrigObj*
 drop TrigObj_l1*
 drop TrigObj_l2*
