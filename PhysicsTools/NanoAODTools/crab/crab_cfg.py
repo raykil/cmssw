@@ -1,3 +1,8 @@
+"""
+Usage: python3 crab_cfg.py NanoAODUL_2017_MC.json
+Accessing CEPH: xrdfs root://hactar01.crc.nd.edu ls /store/user/jkil
+"""
+
 from CRABClient.UserUtilities import config
 import sys
 import json
@@ -37,7 +42,7 @@ if __name__ == '__main__':
     for sample_shorthand, sample in samples.items():
         print("Submitting Jobs for "+sample_shorthand)
         assert (len(sample) == 1), "Multiple VERs of samples are imported! Pick one!"
-        config.Data.outLFNDirBase = f"/store/user/jkil/LFV/skims/20250728/{year}" # must be in /store/user/<username> format for eos!
+        config.Data.outLFNDirBase = f"/store/user/jkil/{year}" # must be in /store/user/<username> format for eos!
         config.Data.inputDataset = sample[0]
         config.General.requestName = sample_shorthand+'_'+year
         config.Data.outputDatasetTag = sample_shorthand
