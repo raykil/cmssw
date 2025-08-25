@@ -2,7 +2,6 @@ __init__.py
 *.pyc
 .*.swp
 .#*
-#*#
 *~
 *.pb
 
@@ -13,3 +12,8 @@ __init__.py
 # ignore files under the top level $CMSSW_BASE/src directory, but not its subdirectories
 /*
 !/*/
+PhysicsTools/NanoAODTools/old_crab/
+PhysicsTools/NanoAODTools/crab/workspace*/
+PhysicsTools/NanoAODTools/crab/*.log
+PhysicsTools/NanoAODTools/crab/*.json
+PhysicsTools/NanoAODTools/crab/archive/

@@ -40,7 +40,7 @@ xrdfs hactar01.crc.nd.edu ls /store/user/<username>
 ```
 
 ### Step 3: Monitoring
-To monitor job status, go to `https://monit-grafana.cern.ch`, look for "CMS Tasks Monitoring GlobalView", and type in your username and time range. You can also use the traditional crab status command to monitor each single job.
+To monitor job status, visit [Grafana](https://monit-grafana.cern.ch/d/cmsTMGlobal/cms-tasks-monitoring-globalview?orgId=11) (https://monit-grafana.cern.ch > "CMS Tasks Monitoring GlobalView"). Type in the user name in "Select User" (upper left). Also adjust the timeframe accordingly (upper right).
 
 ### Step 4: Resubmitting jobs
 Jobs will fail! To resubmit failed CRAB jobs, do
