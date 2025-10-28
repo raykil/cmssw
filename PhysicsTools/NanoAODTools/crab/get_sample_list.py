@@ -1,9 +1,9 @@
-import json, subprocess
+import os, json, subprocess
 from argparse import ArgumentParser
 
 parser = ArgumentParser(prog='python3 get_sample_list.py', epilog="jkil@nd.edu", description='Get the list of samples from DAS.')
 parser.add_argument('-y', '--year', default="2018", type=str, help='Options: 2016preVFP, 2016postVFP, 2017, 2018')
-parser.add_argument('-t', '--type', default="data", type=str, help='Options: data, MC')
+parser.add_argument('-t', '--type', default="data", type=str, help='Options: data, mc')
 args = parser.parse_args()
 
 MCMC_campaigns = {
@@ -31,8 +31,8 @@ def getSamplesFromDAS(query):
 if __name__=='__main__':
     SAMPLES = {}
 
-    if args.type=='MC':
-        with open("NanoAOD_MC.json", 'r') as f: MC_names = json.load(f)
+    if args.type=='mc':
+        with open("sample_jsonNanoAOD_MC.json", 'r') as f: MC_names = json.load(f)
         for short, name in MC_names.items():
             query = f"dataset=/*{name}*/*{MCMC_campaigns[args.year]}*/*NANO*"
             samples = getSamplesFromDAS(query)
@@ -50,7 +50,8 @@ if __name__=='__main__':
                 run_name = sample.split('/')[2].split('_')[0]
                 SAMPLES.update({f"{name}_{run_name}": [sample]})
         
-    json_name = f"NanoAODUL_{args.year}_{args.type}.json"
+    os.makedirs('sample_json', exist_ok=True)
+    json_name = f"sample_json/NanoAODUL_{args.year}_{args.type}.json"
     with open(json_name, 'w') as j:
         json.dump(SAMPLES, j, indent=4, sort_keys=True)
     print(f"{json_name} made!")
