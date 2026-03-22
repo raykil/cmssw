@@ -14,7 +14,7 @@ cmsenv
 ```
 2. Then, set up the CRAB environment with the following commands:
 ```bash
-cd PhysicsTools/NanoAODTools/crab
+cd ~/CMSSW_13_3_0/src/PhysicsTools/NanoAODTools/crab
 source /cvmfs/cms.cern.ch/common/crab-setup.sh
 mkdir workspace
 export CMSSW_BASE=/afs/cern.ch/user/$(whoami | cut -c1)/$(whoami)/CMSSW_13_3_0

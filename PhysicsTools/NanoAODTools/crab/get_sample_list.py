@@ -32,7 +32,7 @@ if __name__=='__main__':
     SAMPLES = {}
 
     if args.type=='mc':
-        with open("sample_jsonNanoAOD_MC.json", 'r') as f: MC_names = json.load(f)
+        with open("sample_json/NanoAOD_MC.json", 'r') as f: MC_names = json.load(f)
         for short, name in MC_names.items():
             query = f"dataset=/*{name}*/*{MCMC_campaigns[args.year]}*/*NANO*"
             samples = getSamplesFromDAS(query)

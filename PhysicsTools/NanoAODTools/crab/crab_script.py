@@ -4,9 +4,10 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import *
 from PhysicsTools.NanoAODTools.postprocessing.utils.crabhelper import inputFiles, runsAndLumis
 
 parser = argparse.ArgumentParser("")
-parser.add_argument('-jobNum', '--jobNum', type=str, default='1', help="")
-parser.add_argument('-y', '--year', type=str, default='2018')
-parser.add_argument('-t', '--test', type=str, default='')
+parser.add_argument('-f', '--files' , nargs='+', help='PFNs like root://cmsxrootd.fnal.gov//.../file.root, separated by space.')
+parser.add_argument('-j', '--jobNum', type=str , default='1')
+parser.add_argument('-y', '--year'  , type=str , default='2018')
+parser.add_argument('-t', '--test'  , type=str , default='')
 args = parser.parse_args()
 
 looseElectron = "(Electron_pt > 10 && abs(Electron_eta) < 2.5 && !((abs(Electron_eta) < 1.566) && (abs(Electron_eta) > 1.442)) && Electron_mvaFall17V2noIso_WP90 && abs(Electron_dxy) < 0.5 && abs(Electron_dz) < 0.2)"
@@ -17,6 +18,7 @@ selections_em   = "(Sum$(%s)>0 && Sum$(%s)>0)"%(looseElectron, looseMuon)
 selections_etau = "(Sum$(%s)>0 && Sum$(%s)>0)"%(looseElectron, looseTau)
 selections_mtau = "(Sum$(%s)>0 && Sum$(%s)>0)"%(looseMuon, looseTau)
 
+# https://twiki.cern.ch/twiki/bin/viewauth/CMS/MissingETOptionalFiltersRun2
 if '2016' in args.year:
   Triggers   = "(HLT_IsoMu24 | HLT_Ele27_WPTight_Gsf | HLT_Ele27_WPTight_Gsf | HLT_IsoTkMu24 | HLT_Ele32_WPTight_Gsf)"
   METFilters = "(Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_eeBadScFilter && Flag_BadPFMuonDzFilter)"
@@ -30,11 +32,12 @@ elif '2018' in args.year:
 selections = "("+selections_em+"||"+selections_etau+"||"+selections_mtau+")&&"+METFilters+"&&(PV_npvsGood > 0)&&"+Triggers
 
 # testFile = ['root://cmsxrootd.fnal.gov/'+args.test]
+files = args.files if args.files else inputFiles()
 
 print("RUNNING")
 p = PostProcessor(
     ".",
-    inputFiles(),
+    files,
     selections,
     branchsel="keep_and_drop_in.txt",
     outputbranchsel="keep_and_drop_out.txt",

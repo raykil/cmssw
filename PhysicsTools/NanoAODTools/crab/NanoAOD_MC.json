@@ -66,5 +66,4 @@
   "VBFHToMuTau_M140_hw" : "VBF_LFV_HToMuTau_M140_TuneCH3_13TeV_powheg_herwig7", 
   "VBFHToMuTau_M150_hw" : "VBF_LFV_HToMuTau_M150_TuneCH3_13TeV_powheg_herwig7", 
   "VBFHToMuTau_M160_hw" : "VBF_LFV_HToMuTau_M160_TuneCH3_13TeV_powheg_herwig7"
-} 
-
+}
