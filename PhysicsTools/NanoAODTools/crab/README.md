@@ -38,6 +38,7 @@ To access the ceph directories, use the following command:
 ```bash
 xrdfs hactar01.crc.nd.edu ls /store/user/<username>
 ```
+To test with one file, run `python3 crab_script.py -f {path/from/DAS/file.root} -y {year}` on local machine. It will save the test skim file in working directory.
 
 ### Step 3: Monitoring
 To monitor job status, visit [Grafana](https://monit-grafana.cern.ch/d/cmsTMGlobal/cms-tasks-monitoring-globalview?orgId=11). Type in the user name in "Select User" (upper left). Also adjust the timeframe accordingly (upper right).
