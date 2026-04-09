@@ -33,7 +33,7 @@ Submit jobs via the following command:
 python3 crab_cfg.py {json name}     # Ex) python3 crab_cfg.py NanoAODUL_2017_MC.json
 ```
 
-As of 2025.07.30, the results are stored in ceph `/store/user/jkil/LFV/skims/<yyyymmdd>/<sample_year>/`.
+As of 2026.04.01, the results are stored in ceph `/cms/cephfs/data/store/user/jkil/{year}`.
 To access the ceph directories, use the following command:
 ```bash
 xrdfs hactar01.crc.nd.edu ls /store/user/<username>

@@ -23,7 +23,7 @@ config.section_("Data")
 config.Data.inputDBS = 'global'
 config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 1
-config.Data.outLFNDirBase = '/store/user/jkil'
+config.Data.outLFNDirBase = '/store/user/jkil'  # overridden per-sample below
 config.Data.publication = False
 config.Data.outputDatasetTag = 'NanoTestPost'
 
@@ -35,14 +35,14 @@ if __name__ == '__main__':
 
     f = open(sys.argv[1]) 
     year = sys.argv[1].split('_')[-2]
-    isMC = 1 if 'MC' in sys.argv[1] else 0
+    isMC = 1 if 'MC' in sys.argv[1] or 'mc' in sys.argv[1] else 0
     samples = json.load(f)
     print(f'isMC {isMC} year {year}')
 
     for sample_shorthand, sample in samples.items():
         print("Submitting Jobs for "+sample_shorthand)
         assert (len(sample) == 1), "Multiple VERs of samples are imported! Pick one!"
-        config.Data.outLFNDirBase = f"/store/user/jkil" # must be in /store/user/<username> format for eos!
+        config.Data.outLFNDirBase = f"/store/user/jkil/{year}" # must be in /store/user/<username> format for eos! ext files are located with original files dir.
         config.Data.inputDataset = sample[0]
         config.General.requestName = sample_shorthand+'_'+year
         config.Data.outputDatasetTag = sample_shorthand
