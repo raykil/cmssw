@@ -38,6 +38,8 @@ if __name__=='__main__':
             samples = getSamplesFromDAS(query)
             for sample in samples:
                 tag = '_ext' if 'ext' in sample else ''
+                if args.year == '2018' and short+tag == 'TTTo2L2Nu_ext':
+                    continue
                 SAMPLES.update({short+tag: [sample]})
 
     elif args.type=='data':
