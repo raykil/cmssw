@@ -1,14 +1,26 @@
 #!/usr/bin/env python3
 import os, argparse, sys
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import *
+from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from PhysicsTools.NanoAODTools.postprocessing.utils.crabhelper import inputFiles, runsAndLumis
 
 parser = argparse.ArgumentParser("")
-parser.add_argument('-f', '--files' , nargs='+', help='PFNs like root://cmsxrootd.fnal.gov//.../file.root, separated by space.')
-parser.add_argument('-j', '--jobNum', type=str , default='1')
-parser.add_argument('-y', '--year'  , type=str , default='2018')
-parser.add_argument('-t', '--test'  , type=str , default='')
+parser.add_argument('-f', '--files'   , nargs='+', help='PFNs like root://cmsxrootd.fnal.gov//.../file.root, separated by space.')
+parser.add_argument('-j', '--jobNum'  , type=str , default='1')
+parser.add_argument('-y', '--year'    , type=str , default='2018')
+parser.add_argument('-t', '--test'    , type=str , default='')
+parser.add_argument('-e', '--embedded', type=int , default=0)
 args = parser.parse_args()
+
+
+class BadPFMuonDzFilter(Module):
+    """Recomputes Flag_BadPFMuonDzFilter for embedded samples which lack this branch.
+    Rejects events where any PF muon has |dz| > 0.5 cm (minDzBestTrack from twiki)."""
+    def analyze(self, event):
+        for i in range(event.nMuon):
+            if event.Muon_isPFcand[i] and abs(event.Muon_dz[i]) > 0.5:
+                return False
+        return True
 
 looseElectron = "(Electron_pt > 10 && abs(Electron_eta) < 2.5 && !((abs(Electron_eta) < 1.566) && (abs(Electron_eta) > 1.442)) && Electron_mvaFall17V2noIso_WP90 && abs(Electron_dxy) < 0.5 && abs(Electron_dz) < 0.2)"
 looseMuon     = "(Muon_pt > 10 && abs(Muon_eta) < 2.4 && Muon_looseId && abs(Muon_dxy) < 0.5 && abs(Muon_dz) < 0.2)"
@@ -29,6 +41,12 @@ elif '2018' in args.year:
   Triggers   = "(HLT_IsoMu24 | HLT_Ele27_WPTight_Gsf | HLT_Ele32_WPTight_Gsf_L1DoubleEG | HLT_Ele32_WPTight_Gsf)"
   METFilters = "(Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_eeBadScFilter && Flag_BadPFMuonDzFilter && Flag_ecalBadCalibFilter)"
 
+# Embedded NanoAOD lacks Flag_BadPFMuonDzFilter; remove it from the pre-skim cut
+# and apply equivalent logic via the BadPFMuonDzFilter module in the event loop instead.
+if args.embedded:
+  METFilters = METFilters.replace(" && Flag_BadPFMuonDzFilter", "")
+
+modules  = [BadPFMuonDzFilter()] if args.embedded else []
 selections = "("+selections_em+"||"+selections_etau+"||"+selections_mtau+")&&"+METFilters+"&&(PV_npvsGood > 0)&&"+Triggers
 
 # testFile = ['root://cmsxrootd.fnal.gov/'+args.test]
@@ -41,7 +59,7 @@ p = PostProcessor(
     selections,
     branchsel="keep_and_drop_in.txt",
     outputbranchsel="keep_and_drop_out.txt",
-    modules=[],
+    modules=modules,
     provenance=True,
     fwkJobReport=True,
     jsonInput=runsAndLumis()

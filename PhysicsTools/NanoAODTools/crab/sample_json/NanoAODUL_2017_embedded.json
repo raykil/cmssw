@@ -1,0 +1,47 @@
+{
+    "Embedding_ElMu_Run2017B": [
+        "/EmbeddingRun2017B/pdas-ElMuRun2017B_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElMu_Run2017C": [
+        "/EmbeddingRun2017C/pdas-ElMuRun2017C_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElMu_Run2017D": [
+        "/EmbeddingRun2017D/pdas-ElMuRun2017D_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElMu_Run2017E": [
+        "/EmbeddingRun2017E/pdas-ElMuRun2017E_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElMu_Run2017F": [
+        "/EmbeddingRun2017F/pdas-ElMuRun2017F_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElTau_Run2017B": [
+        "/EmbeddingRun2017B/pdas-ElTauRun2017B_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElTau_Run2017C": [
+        "/EmbeddingRun2017C/pdas-ElTauRun2017C_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElTau_Run2017D": [
+        "/EmbeddingRun2017D/pdas-ElTauRun2017D_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElTau_Run2017E": [
+        "/EmbeddingRun2017E/pdas-ElTauRun2017E_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_ElTau_Run2017F": [
+        "/EmbeddingRun2017F/pdas-ElTauRun2017F_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_MuTau_Run2017B": [
+        "/EmbeddingRun2017B/pdas-MuTauRun2017B_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_MuTau_Run2017C": [
+        "/EmbeddingRun2017C/pdas-MuTauRun2017C_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_MuTau_Run2017D": [
+        "/EmbeddingRun2017D/pdas-MuTauRun2017D_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_MuTau_Run2017E": [
+        "/EmbeddingRun2017E/pdas-MuTauRun2017E_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ],
+    "Embedding_MuTau_Run2017F": [
+        "/EmbeddingRun2017F/pdas-MuTauRun2017F_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
+    ]
+}

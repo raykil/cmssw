@@ -33,11 +33,13 @@ config.Site.storageSite = "T3_US_NotreDame"   # "T2_CH_CERN"
 if __name__ == '__main__':
     from CRABAPI.RawCommand import crabCommand
 
-    f = open(sys.argv[1]) 
+    f = open(sys.argv[1])
     year = sys.argv[1].split('_')[-2]
     isMC = 1 if 'MC' in sys.argv[1] or 'mc' in sys.argv[1] else 0
     samples = json.load(f)
     print(f'isMC {isMC} year {year}')
+
+    if 'embedded' in sys.argv[1]: config.Data.inputDBS = 'phys03'
 
     for sample_shorthand, sample in samples.items():
         print("Submitting Jobs for "+sample_shorthand)
@@ -46,5 +48,6 @@ if __name__ == '__main__':
         config.Data.inputDataset = sample[0]
         config.General.requestName = sample_shorthand+'_'+year
         config.Data.outputDatasetTag = sample_shorthand
-        config.JobType.scriptArgs = ['year=%s'%year]
+        isEmbedded = 1 if 'embedded' in sys.argv[1] else 0
+        config.JobType.scriptArgs = ['year=%s'%year, 'embedded=%d'%isEmbedded]
         crabCommand('submit', config=config)

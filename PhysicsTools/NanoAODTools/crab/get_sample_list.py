@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser(prog='python3 get_sample_list.py', epilog="jkil@nd.edu", description='Get the list of samples from DAS.')
 parser.add_argument('-y', '--year', default="2018", type=str, help='Options: 2016preVFP, 2016postVFP, 2017, 2018')
-parser.add_argument('-t', '--type', default="data", type=str, help='Options: data, mc')
+parser.add_argument('-t', '--type', default="data", type=str, help='Options: data, mc, embedded')
 args = parser.parse_args()
 
 MCMC_campaigns = {
@@ -14,9 +14,15 @@ MCMC_campaigns = {
 }
 DATA_campaigns = {
     '2016preVFP' :'Run2016*UL2016_MiniAODv2_NanoAODv9-v*',
-    '2016postVFP':'Run2016*UL2016_MiniAODv2_NanoAODv9-v*', 
+    '2016postVFP':'Run2016*UL2016_MiniAODv2_NanoAODv9-v*',
     '2017'       :'Run2017*-UL2017_MiniAODv2_NanoAODv9-v*',
-    '2018'     :'Run2018*-UL2018_MiniAODv2_NanoAODv9-*'
+    '2018'       :'Run2018*-UL2018_MiniAODv2_NanoAODv9-*'
+}
+EMBEDDED_campaigns = {
+    '2016preVFP' : 'EmbeddingRun2016-HIPM*',
+    '2016postVFP': 'EmbeddingRun2016_*',
+    '2017'       : 'EmbeddingRun2017*',
+    '2018'       : 'EmbeddingRun2018*',
 }
 dataNames = ['SingleMuon', 'SingleElectron', 'EGamma'] # 'MuonEG'
 
@@ -51,6 +57,19 @@ if __name__=='__main__':
             for sample in samples:
                 run_name = sample.split('/')[2].split('_')[0]
                 SAMPLES.update({f"{name}_{run_name}": [sample]})
+
+    elif args.type=='embedded':
+        query = f"dataset=/{EMBEDDED_campaigns[args.year]}/*106X_ULegacy_NanoAODv9*-00000000000000000000000000000000/USER instance=prod/phys03"
+        samples = getSamplesFromDAS(query)
+        for sample in samples:
+            parts = sample.split('/')
+            era_part = parts[1]   # e.g. EmbeddingRun2018A
+            tag_part = parts[2]   # e.g. pdas-MuTauRun2018A_106X_...
+            tag_name = tag_part.split('-', 1)[1]  # strip 'pdas-'
+            channel = tag_name.split('Run')[0].split('FinalState')[0]  # MuTau, ElTau, ElMu
+            era = era_part[len('Embedding'):]       # Run2018A, Run2017B, Run2016_F, etc.
+            key = f"Embedding_{channel}_{era}"
+            SAMPLES[key] = [sample]
         
     os.makedirs('sample_json', exist_ok=True)
     json_name = f"sample_json/NanoAODUL_{args.year}_{args.type}.json"
