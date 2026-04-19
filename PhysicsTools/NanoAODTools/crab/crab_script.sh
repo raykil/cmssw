@@ -22,5 +22,5 @@ mv src $CMSSW_BASE/src
 mv python $CMSSW_BASE/python
 echo Found Proxy in: $X509_USER_PROXY
 echo $1 $2
-python3 crab_script.py --jobNum=$1 --$2
+python3 crab_script.py --jobNum=$1 --$2 --$3
 fi

@@ -9,7 +9,7 @@ parser.add_argument('-f', '--files'   , nargs='+', help='PFNs like root://cmsxro
 parser.add_argument('-j', '--jobNum'  , type=str , default='1')
 parser.add_argument('-y', '--year'    , type=str , default='2018')
 parser.add_argument('-t', '--test'    , type=str , default='')
-parser.add_argument('-e', '--embedded', type=int , default=0)
+parser.add_argument('-e', '--embd', type=int , default=0)
 args = parser.parse_args()
 
 
@@ -43,10 +43,10 @@ elif '2018' in args.year:
 
 # Embedded NanoAOD lacks Flag_BadPFMuonDzFilter; remove it from the pre-skim cut
 # and apply equivalent logic via the BadPFMuonDzFilter module in the event loop instead.
-if args.embedded:
+if args.embd:
   METFilters = METFilters.replace(" && Flag_BadPFMuonDzFilter", "")
 
-modules  = [BadPFMuonDzFilter()] if args.embedded else []
+modules  = [BadPFMuonDzFilter()] if args.embd else []
 selections = "("+selections_em+"||"+selections_etau+"||"+selections_mtau+")&&"+METFilters+"&&(PV_npvsGood > 0)&&"+Triggers
 
 # testFile = ['root://cmsxrootd.fnal.gov/'+args.test]

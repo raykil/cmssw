@@ -39,7 +39,7 @@ if __name__ == '__main__':
     samples = json.load(f)
     print(f'isMC {isMC} year {year}')
 
-    if 'embedded' in sys.argv[1]: config.Data.inputDBS = 'phys03'
+    if 'embd' in sys.argv[1]: config.Data.inputDBS = 'phys03'
 
     for sample_shorthand, sample in samples.items():
         print("Submitting Jobs for "+sample_shorthand)
@@ -48,6 +48,6 @@ if __name__ == '__main__':
         config.Data.inputDataset = sample[0]
         config.General.requestName = sample_shorthand+'_'+year
         config.Data.outputDatasetTag = sample_shorthand
-        isEmbedded = 1 if 'embedded' in sys.argv[1] else 0
-        config.JobType.scriptArgs = ['year=%s'%year, 'embedded=%d'%isEmbedded]
+        isEmbd = 1 if 'embd' in sys.argv[1] else 0
+        config.JobType.scriptArgs = ['year=%s'%year, 'embd=%d'%isEmbd]
         crabCommand('submit', config=config)
