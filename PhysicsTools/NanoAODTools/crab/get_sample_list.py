@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser(prog='python3 get_sample_list.py', epilog="jkil@nd.edu", description='Get the list of samples from DAS.')
 parser.add_argument('-y', '--year', default="2018", type=str, help='Options: 2016preVFP, 2016postVFP, 2017, 2018')
-parser.add_argument('-t', '--type', default="data", type=str, help='Options: data, mc, embedded')
+parser.add_argument('-t', '--type', default="data", type=str, help='Options: data, mc, embd')
 args = parser.parse_args()
 
 MCMC_campaigns = {
@@ -58,7 +58,7 @@ if __name__=='__main__':
                 run_name = sample.split('/')[2].split('_')[0]
                 SAMPLES.update({f"{name}_{run_name}": [sample]})
 
-    elif args.type=='embedded':
+    elif args.type=='embd':
         query = f"dataset=/{EMBEDDED_campaigns[args.year]}/*106X_ULegacy_NanoAODv9*-00000000000000000000000000000000/USER instance=prod/phys03"
         samples = getSamplesFromDAS(query)
         if   args.year=='2016preVFP' : samples = [s for s in samples if 'HIPM' in s]
