@@ -61,6 +61,8 @@ if __name__=='__main__':
     elif args.type=='embedded':
         query = f"dataset=/{EMBEDDED_campaigns[args.year]}/*106X_ULegacy_NanoAODv9*-00000000000000000000000000000000/USER instance=prod/phys03"
         samples = getSamplesFromDAS(query)
+        if   args.year=='2016preVFP' : samples = [s for s in samples if 'HIPM' in s]
+        elif args.year=='2016postVFP': samples = [s for s in samples if 'HIPM' not in s]
         for sample in samples:
             parts = sample.split('/')
             era_part = parts[1]   # e.g. EmbeddingRun2018A

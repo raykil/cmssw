@@ -1,19 +1,4 @@
 {
-    "Embedding_ElMu_Run2016-HIPM_B_ver2": [
-        "/EmbeddingRun2016-HIPM_B_ver2/pdas-ElMuRun2016B_ver2_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElMu_Run2016-HIPM_C": [
-        "/EmbeddingRun2016-HIPM_C/pdas-ElMuRun2016C_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElMu_Run2016-HIPM_D": [
-        "/EmbeddingRun2016-HIPM_D/pdas-ElMuRun2016D_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElMu_Run2016-HIPM_E": [
-        "/EmbeddingRun2016-HIPM_E/pdas-ElMuRun2016E_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElMu_Run2016-HIPM_F": [
-        "/EmbeddingRun2016-HIPM_F/pdas-ElMuRun2016F_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
     "Embedding_ElMu_Run2016_F": [
         "/EmbeddingRun2016_F/pdas-ElMuRun2016F_post_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
     ],
@@ -23,21 +8,6 @@
     "Embedding_ElMu_Run2016_H": [
         "/EmbeddingRun2016_H/pdas-ElMuRun2016H_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
     ],
-    "Embedding_ElTau_Run2016-HIPM_B_ver2": [
-        "/EmbeddingRun2016-HIPM_B_ver2/pdas-ElTauRun2016B_ver2_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElTau_Run2016-HIPM_C": [
-        "/EmbeddingRun2016-HIPM_C/pdas-ElTauRun2016C_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElTau_Run2016-HIPM_D": [
-        "/EmbeddingRun2016-HIPM_D/pdas-ElTauRun2016D_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElTau_Run2016-HIPM_E": [
-        "/EmbeddingRun2016-HIPM_E/pdas-ElTauRun2016E_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_ElTau_Run2016-HIPM_F": [
-        "/EmbeddingRun2016-HIPM_F/pdas-ElTauRun2016F_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
     "Embedding_ElTau_Run2016_F": [
         "/EmbeddingRun2016_F/pdas-ElTauRun2016F_post_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
     ],
@@ -46,21 +16,6 @@
     ],
     "Embedding_ElTau_Run2016_H": [
         "/EmbeddingRun2016_H/pdas-ElTauRun2016H_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_MuTau_Run2016-HIPM_B_ver2": [
-        "/EmbeddingRun2016-HIPM_B_ver2/pdas-MuTauRun2016B_ver2_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_MuTau_Run2016-HIPM_C": [
-        "/EmbeddingRun2016-HIPM_C/pdas-MuTauRun2016C_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_MuTau_Run2016-HIPM_D": [
-        "/EmbeddingRun2016-HIPM_D/pdas-MuTauRun2016D_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_MuTau_Run2016-HIPM_E": [
-        "/EmbeddingRun2016-HIPM_E/pdas-MuTauRun2016E_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
-    ],
-    "Embedding_MuTau_Run2016-HIPM_F": [
-        "/EmbeddingRun2016-HIPM_F/pdas-MuTauRun2016F_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
     ],
     "Embedding_MuTau_Run2016_F": [
         "/EmbeddingRun2016_F/pdas-MuTauRun2016F_post_106X_ULegacy_NanoAODv9-00000000000000000000000000000000/USER"
