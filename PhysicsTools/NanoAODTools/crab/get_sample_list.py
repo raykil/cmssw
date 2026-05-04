@@ -1,4 +1,4 @@
-import os, json, subprocess
+import os, json, re, subprocess
 from argparse import ArgumentParser
 
 parser = ArgumentParser(prog='python3 get_sample_list.py', epilog="jkil@nd.edu", description='Get the list of samples from DAS.')
@@ -31,7 +31,7 @@ def getSamplesFromDAS(query):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate()
     samples = [str(i.strip(), 'utf-8') for i in out.split(b'\n') if i.strip()]
-    samples = [s for s in samples if not any(x in s for x in ['PUFor', 'JMENano', 'Pilot', 'PU35For', 'bugFix'])]
+    samples = [s for s in samples if not any(x in s for x in ['PUFor', 'JMENano', 'Pilot', 'pilot', 'PU35For', 'bugFix'])]
     return samples
 
 if __name__=='__main__':
@@ -43,8 +43,9 @@ if __name__=='__main__':
             query = f"dataset=/*{name}*/*{MCMC_campaigns[args.year]}*/*NANO*"
             samples = getSamplesFromDAS(query)
             for sample in samples:
-                tag = '_ext' if 'ext' in sample else ''
-                if args.year == '2018' and short+tag == 'TTTo2L2Nu_ext':
+                m = re.search(r'(ext\d+)', sample)
+                tag = '_' + m.group(1) if m else ''
+                if args.year == '2018' and short == 'TTTo2L2Nu' and tag:
                     continue
                 SAMPLES.update({short+tag: [sample]})
 
